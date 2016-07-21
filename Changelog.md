@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.2.0
+
+### Added
+
+-  [#11](https://github.com/bitExpert/magento2-force-login/issues/11) Magento 2.1 compatibility added
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 1.1.3
 
 ### Added

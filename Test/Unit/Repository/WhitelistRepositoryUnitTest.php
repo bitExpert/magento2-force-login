@@ -39,7 +39,10 @@ class WhitelistRepositoryUnitTest extends \PHPUnit_Framework_TestCase
 
         // check if mandatory interfaces are implemented
         $classInterfaces = class_implements($whitelistRepository);
-        $this->assertContains('bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface', $classInterfaces);
+        $this->assertContains(
+            'bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface',
+            $classInterfaces
+        );
     }
 
     /**
@@ -128,7 +131,9 @@ class WhitelistRepositoryUnitTest extends \PHPUnit_Framework_TestCase
      */
     protected function getWhitelistEntryCollectionFactory()
     {
-        return $this->createMock('\bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface');
+        return $this->createMock(
+            '\bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface'
+        );
     }
 
     /**
