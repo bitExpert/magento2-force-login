@@ -3,7 +3,7 @@
   "description": "Magento2 Module to force the login for frontend customers.",
   "type": "magento2-module",
   "minimum-stability": "stable",
-  "version": "1.0.1",
+  "version": "1.1.4",
   "license": "Apache-2.0",
   "authors": [
     {
@@ -23,7 +23,8 @@
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.3",
-    "phing/phing": "^2.8.0"
+    "phing/phing": "^2.8.0",
+    "phpunit/phpunit": "~5.0"
   },
   "autoload": {
     "files": [

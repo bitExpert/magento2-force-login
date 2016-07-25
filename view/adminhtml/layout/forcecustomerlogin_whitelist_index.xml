@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 bitExpert AG. All rights reserved.
+ * See LICENSE file for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <head>
+        <title>Forced Login Whitelist - Overview</title>
+    </head>
+
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="whitelist_overview"/>
+            <block class="bitExpert\ForceCustomerLogin\Block\Adminhtml\Whitelist" name="whitelist_list"/>
+        </referenceContainer>
+    </body>
+</page>

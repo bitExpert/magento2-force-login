@@ -1,6 +1,19 @@
 <?xml version="1.0"?>
 <project name="magento2-force-login" basedir="." default="sniff">
 
+    <target name="unit"
+            description="Runs application unit tests">
+
+        <exec executable="./vendor/bin/phpunit"
+              passthru="true"
+              checkreturn="true">
+            <arg path="--testsuite=unit" />
+            <arg path="--verbose" />
+            <arg value="--configuration" />
+            <arg value="phpunit.xml" />
+        </exec>
+    </target>
+
     <target name="sniff">
         <exec executable="./vendor/bin/phpcs"
               passthru="true"

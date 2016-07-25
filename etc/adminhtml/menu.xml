@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 bitExpert AG. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="bitExpert_ForceCustomerLogin::manage"
+             title="Forced Login Whitelist"
+             module="bitExpert_ForceCustomerLogin"
+             parent="Magento_Customer::customer"
+             sortOrder="20"
+             action="ForceCustomerLogin/Whitelist"
+             resource="BitExpert_ForceCustomerLogin::bitexpert_force_customer_login_manage"/>
+    </menu>
+</config>

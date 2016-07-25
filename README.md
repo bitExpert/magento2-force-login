@@ -1,44 +1,48 @@
-# Magento2 Frontend Customer Force Login Module 
+# Magento2 Force Frontend Customer Login Module 
 
-The Magento2 Frontend Customer Force Login Module redirects a visitor to the Magento2 Frontend login page. It is 
-possible to overwrite the whitelisted urls to add custom definitions.
+The **Magento2** *Force Frontend Customer Login* Module redirects a storefront visitor to the Magento2 Frontend login page, 
+if the visitor is not logged in. It is possible to configure the whitelisted urls to add custom definitions.
 
-Installation
-------------
+## Installation
 
-The preferred way of installing `bitexpert/magento2-force-login` is through Composer. Simply add `bitexpert/magento2-force-login` 
+The preferred way of installing `bitexpert/magento2-force-customer-login` is through Composer. Simply add `bitexpert/magento2-force-customer-login` 
 as a dependency:
 
 ```
-composer.phar require bitexpert/magento2-force-login
+composer.phar require bitexpert/magento2-force-customer-login
 ```
 
-Example DI definition for custom definitions
---------------------------------------------
+## How to configure the module
 
-```xml
-<type name="\bitExpert\ForceCustomerLogin\Controller\LoginCheck">
-    <arguments>
-        <argument name="ignoreUrls" xsi:type="array">
-                <item name="admin_area" xsi:type="string">^/admin/?.*$</item>
-                <item name="rest_api" xsi:type="string">^/rest/?.*$</item>
-                <item name="customer_account_login" xsi:type="string">^/customer/account/login/?$</item>
-                <item name="customer_account_logout" xsi:type="string">^/customer/account/logout/?$</item>
-                <item name="customer_account_logout_success" xsi:type="string">^/customer/account/logoutSuccess/?$</item>
-                <item name="customer_account_create" xsi:type="string">^/customer/account/create/?$</item>
-                <item name="customer_account_create_password" xsi:type="string">^/customer/account/createPassword/?.*$</item>
-                <item name="customer_account_forgot_password" xsi:type="string">^/customer/account/forgotpassword/?.*$</item>
-                <item name="customer_account_forgot_password_post" xsi:type="string">^/customer/account/forgotpasswordpost/?.*$</item>
-                <item name="customer_section_load" xsi:type="string">^/customer/section/load/?$</item>
-                <item name="contact_us" xsi:type="string">^/contact/?$</item>
-                <item name="help" xsi:type="string">^/help/?$</item>
-        </argument>
-        <argument name="targetUrl" xsi:type="string">customer/account/login</argument>
-    </arguments>
-</type>
-```
+### Navigation
 
-License
--------
+Navigating through the *Magento 2* backend menu by clicking onto **Customers** you must see a new menu entry **Forced Login Whitelist**. 
+Enter this menu entry.
+
+![alt text](./resources/ui_step_01.png "UI Navigation")
+
+### Overview Grid
+
+You can add new entries by clicking on the *Add Entry* button in the upper right corner ( **1** ), [see below](#detail-form). 
+The grid ( **2** ) contains all existing whitelisted *Url Rules*, for which the forced redirect to the *Customer Login Page* is omitted.
+The *Url Rules* ( **3** ) are part of a regular expression checking on the called *Url* and tries to match against the whitelist.
+*Url Rules* may be related to all stores or to a specific one ( **4** ). All rules except some mandatory ones are editable ( **5** ) and removeable ( **6** ).
+
+![alt text](./resources/ui_step_02.png "UI Grid")
+
+### Detail Form
+
+You can return to the *Overview Grid* by using the *Back* button ( **1** ). The *Label* value has only declarative character and
+is for information purpose only ( **2** ). The *Url Rule* is part of a regular expression checking on the called 
+*Url* and tries to match against the whitelist ( **3** ). *Url Rules* may be related to all stores or to a specific one ( **4** ).
+Persist the rule by using the *Save* button ( **5** ).
+
+![alt text](./resources/ui_step_03.png "UI Form")
+
+## Contribution
+
+Feel free to contribute to this module by reporting issues or create some pull requests for improvements.
+
+## License
 
 The Magento2 Frontend Customer Force Login Module is released under the Apache 2.0 license.

@@ -15,24 +15,52 @@
     <!-- Controllers -->
     <type name="\bitExpert\ForceCustomerLogin\Controller\LoginCheck">
         <arguments>
-            <argument name="ignoreUrls" xsi:type="array">
-                <item name="admin_area" xsi:type="string">^/admin/?.*$</item>
-                <item name="rest_api" xsi:type="string">^/rest/?.*$</item>
-                <item name="customer_account_login" xsi:type="string">^/customer/account/login/?$</item>
-                <item name="customer_account_logout" xsi:type="string">^/customer/account/logout/?$</item>
-                <item name="customer_account_logout_success" xsi:type="string">^/customer/account/logoutSuccess/?$</item>
-                <item name="customer_account_create" xsi:type="string">^/customer/account/create/?$</item>
-                <item name="customer_account_create_password" xsi:type="string">^/customer/account/createPassword/?.*$</item>
-                <item name="customer_account_forgot_password" xsi:type="string">^/customer/account/forgotpassword/?.*$</item>
-                <item name="customer_account_forgot_password_post" xsi:type="string">^/customer/account/forgotpasswordpost/?.*$</item>
-                <item name="customer_section_load" xsi:type="string">^/customer/section/load/?$</item>
-                <item name="contact_us" xsi:type="string">^/contact/?$</item>
-                <item name="help" xsi:type="string">^/help/?$</item>
-            </argument>
             <argument name="targetUrl" xsi:type="string">customer/account/login</argument>
         </arguments>
     </type>
     <preference for="\bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface"
                 type="\bitExpert\ForceCustomerLogin\Controller\LoginCheck" />
+
+    <!-- Entities -->
+    <preference for="\bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryInterface"
+                type="\bitExpert\ForceCustomerLogin\Model\WhitelistEntry" />
+
+    <!-- Factories -->
+    <preference for="\bitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryFactoryInterface"
+                type="\bitExpert\ForceCustomerLogin\Model\WhitelistEntryFactory" />
+    <preference for="\bitExpert\ForceCustomerLogin\Api\Data\Collection\WhitelistEntryCollectionFactoryInterface"
+                type="\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\CollectionFactory" />
+
+    <!-- Preferences -->
+    <preference for="\bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface"
+                type="\bitExpert\ForceCustomerLogin\Controller\LoginCheck" />
+
+    <!-- Repositories -->
+    <preference for="\bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface"
+                type="\bitExpert\ForceCustomerLogin\Repository\WhitelistRepository" />
+
+
+    <!-- UI Components -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="whitelist_overview_data_source" xsi:type="string">\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="\bitExpert\ForceCustomerLogin\Model\WhitelistEntry\Config">
+        <arguments>
+            <argument name="state" xsi:type="object">Magento\Framework\App\State\Proxy</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Grid\Collection" 
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bitexpert_forcelogin_whitelist</argument>
+            <argument name="resourceModel" xsi:type="string">\bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry</argument>
+        </arguments>
+    </virtualType>
 
 </config>

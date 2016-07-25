@@ -10,8 +10,8 @@
  */
 namespace bitExpert\ForceCustomerLogin\Observer;
 
-use bitExpert\ForceCustomerLogin\Api\Observer\LoginRequiredObserverInterface;
-use bitExpert\ForceCustomerLogin\Observer\LoginRequiredOnCustomerSessionInitObserver;
+use \bitExpert\ForceCustomerLogin\Api\Observer\LoginRequiredObserverInterface;
+use \bitExpert\ForceCustomerLogin\Observer\LoginRequiredOnCustomerSessionInitObserver;
 
 /**
  * Class LoginRequiredOnVisitorInitObserver

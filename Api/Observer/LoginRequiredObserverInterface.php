@@ -10,7 +10,7 @@
  */
 namespace bitExpert\ForceCustomerLogin\Api\Observer;
 
-use Magento\Framework\Event\ObserverInterface;
+use \Magento\Framework\Event\ObserverInterface;
 
 /**
  * Interface LoginRequiredObserverInterface

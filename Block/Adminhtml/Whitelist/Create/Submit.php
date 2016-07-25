@@ -8,15 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace bitExpert\ForceCustomerLogin\Api\Controller;
-
-use \Magento\Framework\App\ActionInterface;
+namespace bitExpert\ForceCustomerLogin\Block\Adminhtml\Whitelist\Create;
 
 /**
- * Interface LoginCheckInterface
- * @package bitExpert\ForceCustomerLogin\Api\Controller
+ * Class Submit
+ * @package bitExpert\ForceCustomerLogin\Block\Adminhtml\Whitelist\Create
  */
-interface LoginCheckInterface extends ActionInterface
+class Submit extends \Magento\Backend\Block\Template
 {
-
 }

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * This file is part of the Magento2 Force Login Module package.
+ *
+ * (c) bitExpert AG
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">whitelist_overview.whitelist_overview_data_source</item>
+            <item name="deps" xsi:type="string">whitelist_overview.whitelist_overview_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">whitelist_entry_columns</item>
+    </argument>
+
+
+
+    <dataSource name="whitelist_overview_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">whitelist_overview_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">whitelist_entry_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+
+
+    <columns name="whitelist_entry_columns">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="storageConfig" xsi:type="array">
+                    <item name="provider" xsi:type="string">whitelist_overview.whitelist_overview.listing_top.bookmarks</item>
+                    <item name="namespace" xsi:type="string">current</item>
+                </item>
+                <item name="childDefaults" xsi:type="array">
+                    <item name="fieldAction" xsi:type="array">
+                        <item name="provider" xsi:type="string">whitelist_overview.whitelist_overview.whitelist_entry_columns.actions</item>
+                        <item name="target" xsi:type="string">applyAction</item>
+                        <item name="params" xsi:type="array">
+                            <item name="0" xsi:type="string">edit</item>
+                            <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                        </item>
+                    </item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">whitelist_overview.whitelist_overview.listing_top.bookmarks</item>
+                        <item name="root" xsi:type="string">columns.${ $.index }</item>
+                        <item name="namespace" xsi:type="string">current.${ $.storageConfig.root}</item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">whitelist_entry_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="whitelist_entry_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">desc</item>
+                    <item name="label" xsi:type="string" translate="true">ID</item>
+                </item>
+            </argument>
+        </column>
+        <column name="label">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Label</item>
+                </item>
+            </argument>
+        </column>
+        <column name="url_rule">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">URL Rule</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="store" class="\bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\StoreName">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">store_id</item>
+                    <item name="label" xsi:type="string" translate="true">Store</item>
+                </item>
+            </argument>
+        </column>
+
+        <actionsColumn name="actions_edit" class="\bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\EditAction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">whitelist_entry_id</item>
+                    <item name="viewUrlPath" xsi:type="string">ForceCustomerLogin/Whitelist/Edit</item>
+                    <item name="urlEntityParamName" xsi:type="string">whitelist_entry_id</item>
+                    <item name="label" xsi:type="string" translate="true">Edit</item>
+                </item>
+            </argument>
+        </actionsColumn>
+
+        <actionsColumn name="actions_delete" class="\bitExpert\ForceCustomerLogin\Ui\Component\Listing\Column\DeleteAction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">whitelist_entry_id</item>
+                    <item name="viewUrlPath" xsi:type="string">ForceCustomerLogin/Whitelist/Delete</item>
+                    <item name="urlEntityParamName" xsi:type="string">whitelist_entry_id</item>
+                    <item name="label" xsi:type="string" translate="true">Deletion</item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+</listing>

@@ -10,9 +10,9 @@
  */
 namespace bitExpert\ForceCustomerLogin\Observer;
 
-use bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
-use bitExpert\ForceCustomerLogin\Api\Observer\LoginRequiredObserverInterface;
-use Magento\Framework\Event\Observer;
+use \bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
+use \bitExpert\ForceCustomerLogin\Api\Observer\LoginRequiredObserverInterface;
+use \Magento\Framework\Event\Observer;
 
 /**
  * Class LoginRequiredOnCustomerSessionInitObserver
@@ -40,6 +40,15 @@ class LoginRequiredOnCustomerSessionInitObserver implements LoginRequiredObserve
      */
     public function execute(Observer $observer)
     {
+        /** @var $customerSession \Magento\Customer\Model\Session */
+        $customerSession = $observer->getEvent()->getData('customer_session');
+
+        // if user is logged in, every thing is fine
+        if ($customerSession instanceof \Magento\Customer\Model\Session &&
+            $customerSession->isLoggedIn()) {
+            return;
+        }
+
         // check if a redirect is mandatory
         $this->loginCheckController->execute();
     }
