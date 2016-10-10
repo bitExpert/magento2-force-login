@@ -14,9 +14,7 @@
 
     <!-- Controllers -->
     <type name="\bitExpert\ForceCustomerLogin\Controller\LoginCheck">
-        <arguments>
-            <argument name="targetUrl" xsi:type="string">customer/account/login</argument>
-        </arguments>
+
     </type>
     <preference for="\bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface"
                 type="\bitExpert\ForceCustomerLogin\Controller\LoginCheck" />
