@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="force_customer_login" translate="label" sortOrder="1000">
+            <label>Force Customer Login</label>
+        </tab>
+        <section id="force_customer_login" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Config</label>
+            <tab>force_customer_login</tab>
+            <resource>Maxime_Jobs::force_customer_login</resource>
+            <group id="url_config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Redirect Url</label>
+                <field id="redirect_url" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Url to redirect to</label>
+                    <comment>This is the url which will be shown when a user who is not logged in tries to access a members on page</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

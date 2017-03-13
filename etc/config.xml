@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <force_customer_login>
+            <url_config>
+                <redirect_url>customer/account/login</redirect_url>
+            </url_config>
+        </force_customer_login>
+    </default>
+</config>

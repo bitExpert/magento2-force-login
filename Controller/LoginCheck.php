@@ -15,6 +15,8 @@ use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use \bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection;
 use \Magento\Framework\App\Action\Action;
 use \Magento\Framework\App\Action\Context;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Store\Model\ScopeInterface;
 use \Magento\Framework\UrlInterface;
 use \Magento\Framework\App\DeploymentConfig;
 use \Magento\Backend\Setup\ConfigOptionsList as BackendConfigOptionsList;
@@ -25,6 +27,8 @@ use \Magento\Backend\Setup\ConfigOptionsList as BackendConfigOptionsList;
  */
 class LoginCheck extends Action implements LoginCheckInterface
 {
+
+    const REDIRECT_URL = 'force_customer_login/url_config/redirect_url';
     /**
      * @var UrlInterface
      */
@@ -41,6 +45,10 @@ class LoginCheck extends Action implements LoginCheckInterface
      * @var string
      */
     protected $targetUrl;
+    /**
+     * @var
+     */
+    private $scopeConfig;
 
     /**
      * Creates a new {@link \bitExpert\ForceCustomerLogin\Controller\LoginCheck}.
@@ -48,17 +56,18 @@ class LoginCheck extends Action implements LoginCheckInterface
      * @param Context $context
      * @param DeploymentConfig $deploymentConfig
      * @param WhitelistRepositoryInterface $whitelistRepository
-     * @param string $targetUrl
+     * @internal param string $targetUrl
      */
     public function __construct(
         Context $context,
         DeploymentConfig $deploymentConfig,
         WhitelistRepositoryInterface $whitelistRepository,
-        $targetUrl
+        ScopeConfigInterface $scopeConfig
     ) {
         $this->deploymentConfig = $deploymentConfig;
         $this->whitelistRepository = $whitelistRepository;
-        $this->targetUrl = $targetUrl;
+        $this->scopeConfig = $scopeConfig;
+        $this->targetUrl = $this->getRedirectUrlConfig();
         parent::__construct($context);
     }
 
@@ -86,6 +95,14 @@ class LoginCheck extends Action implements LoginCheckInterface
         }
 
         $this->_redirect($this->targetUrl)->sendResponse();
+    }
+
+    protected function getRedirectUrlConfig() {
+        $url = $this->getConfigUrl();
+        if ($url == '') {
+            $url = $this->getDefaultUrl();
+        }
+        return $url;
     }
 
     /**
@@ -129,5 +146,27 @@ class LoginCheck extends Action implements LoginCheckInterface
         \array_push($ignoreUrls, $adminUri);
 
         return $ignoreUrls;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getConfigUrl()
+    {
+        return $this->scopeConfig->getValue(
+            self::REDIRECT_URL,
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getDefaultUrl()
+    {
+        return $this->scopeConfig->getValue(
+            'force_customer_login/default_redirect_url',
+            ScopeInterface::SCOPE_STORE
+        );
     }
 }
