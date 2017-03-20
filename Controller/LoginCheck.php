@@ -13,12 +13,14 @@ namespace bitExpert\ForceCustomerLogin\Controller;
 use \bitExpert\ForceCustomerLogin\Api\Controller\LoginCheckInterface;
 use \bitExpert\ForceCustomerLogin\Api\Repository\WhitelistRepositoryInterface;
 use \bitExpert\ForceCustomerLogin\Model\ResourceModel\WhitelistEntry\Collection;
+use Magento\Config\Test\Handler\ConfigData\ConfigDataInterface;
 use \Magento\Framework\App\Action\Action;
 use \Magento\Framework\App\Action\Context;
 use \bitExpert\ForceCustomerLogin\Model\Session;
 use \Magento\Framework\UrlInterface;
 use \Magento\Framework\App\DeploymentConfig;
 use \Magento\Backend\Setup\ConfigOptionsList as BackendConfigOptionsList;
+use \Magento\Framework\App\Config\ScopeConfigInterface;
 
 /**
  * Class LoginCheck
@@ -43,6 +45,10 @@ class LoginCheck extends Action implements LoginCheckInterface
      */
     protected $whitelistRepository;
     /**
+     * @var ScopeConfigInterface
+     */
+    protected $scopeConfig;
+    /**
      * @var string
      */
     protected $targetUrl;
@@ -50,22 +56,25 @@ class LoginCheck extends Action implements LoginCheckInterface
     /**
      * Creates a new {@link \bitExpert\ForceCustomerLogin\Controller\LoginCheck}.
      *
-     * @param Context $context
-     * @param Session $session
-     * @param DeploymentConfig $deploymentConfig
+     * @param Context                      $context
+     * @param Session                      $session
+     * @param DeploymentConfig             $deploymentConfig
      * @param WhitelistRepositoryInterface $whitelistRepository
-     * @param string $targetUrl
+     * @param ScopeConfigInterface         $scopeConfig
+     * @param string                       $targetUrl
      */
     public function __construct(
         Context $context,
         Session $session,
         DeploymentConfig $deploymentConfig,
         WhitelistRepositoryInterface $whitelistRepository,
+        ScopeConfigInterface $scopeConfig,
         $targetUrl
     ) {
         $this->session = $session;
         $this->deploymentConfig = $deploymentConfig;
         $this->whitelistRepository = $whitelistRepository;
+        $this->scopeConfig = $scopeConfig;
         $this->targetUrl = $targetUrl;
         parent::__construct($context);
     }
@@ -78,6 +87,11 @@ class LoginCheck extends Action implements LoginCheckInterface
         $url = $this->_url->getCurrentUrl();
         $path = \parse_url($url, PHP_URL_PATH);
 
+        // if not enabled for site, no redirect needed
+        if ($this->scopeConfig->getValue('customer/startup/force_login','store') != 1) {
+            return;
+        }
+
         // current path is already pointing to target url, no redirect needed
         if ($this->targetUrl === $path) {
             return;
@@ -88,7 +102,7 @@ class LoginCheck extends Action implements LoginCheckInterface
 
         // check if current url is a match with one of the ignored urls
         foreach ($extendedIgnoreUrls as $ignoreUrl) {
-            if (\preg_match(\sprintf('#^.*%s/?.*$#i', $this->quoteRule($ignoreUrl)), $path)) {
+            if (\preg_match(\sprintf('#^%s/?$#i', $this->quoteRule($ignoreUrl)), $path)) {
                 return;
             }
         }
