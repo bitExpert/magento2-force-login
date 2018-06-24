@@ -55,12 +55,10 @@ class AfterLoginPlugin
     public function __construct(
         Session $session,
         ScopeConfigInterface $scopeConfig,
-        $defaultTargetUrl,
         \Magento\Framework\App\Response\RedirectInterface $redirect
     ) {
         $this->session = $session;
         $this->scopeConfig = $scopeConfig;
-        $this->defaultTargetUrl = $defaultTargetUrl;
         $this->redirect = $redirect;
     }
 
