@@ -17,14 +17,14 @@ able to browse the the website or the product catalog.
 * Multistore-Support: Define if whitelist rules either apply globally or for specific stores
 
 ## Installation
-The preferred way of installing `bitexpert/magento2-force-customer-login` is through Composer. Simply add `bitexpert/magento2-force-customer-login` 
+The preferred way of installing `MyVitamins/magento2-force-customer-login` is through Composer. Simply add `MyVitamins/magento2-force-customer-login` 
 as a dependency:
 
 ```
-composer.phar require bitexpert/magento2-force-customer-login
+composer.phar require MyVitamins/magento2-force-customer-login
 ```
 
-Optional you can download the latest version [here](https://github.com/bitExpert/magento2-force-login/releases) and install the
+Optional you can download the latest version [here](https://github.com/MyVitamins/magento2-force-login/releases) and install the
 decompressed code in your projects directory under *app/code/BitExpert/ForceCustomerLogin*.  
 
 ## Post-Install
@@ -32,7 +32,7 @@ decompressed code in your projects directory under *app/code/BitExpert/ForceCust
 After the installment of the module source code, the module has to be enabled by the *Magento® 2* CLI.
 
 ```
-bin/magento module:enable BitExpert_ForceCustomerLogin
+bin/magento module:enable MyVitamins_ForceCustomerLogin
 ```
 
 ## System Upgrade
