@@ -148,6 +148,11 @@ class LoginCheck implements LoginCheckInterface
         if ($this->passwordResetHelper->processDirectCreatePasswordRequest($this->url, $this->request)) {
             return false;
         }
+
+        //Get the customer account URL if `Redirect Customer to Account Dashboard after Logging in` is enabled
+        if ($this->isRedirectToCustomerDashBoardEnabled()) {
+            $url = $this->url->getRouteUrl('customer/account/');
+        }
         
         // Set Url To redirect ,using standard method of magento
         $this->customerSession->setBeforeAuthUrl($url);
@@ -240,6 +245,17 @@ class LoginCheck implements LoginCheckInterface
             '%s%s',
             $this->getBaseUrl(),
             $targetUrl
+        );
+    }
+
+    /**
+     * @return bool
+     */
+    private function isRedirectToCustomerDashBoardEnabled()
+    {
+        return (bool) $this->scopeConfig->isSetFlag(
+            self::CONFIG_PATH_REDIRECT_TO_CUSTOMER_DASHBOARD,
+            ScopeInterface::SCOPE_WEBSITES
         );
     }
 }

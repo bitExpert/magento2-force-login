@@ -25,6 +25,12 @@ interface LoginCheckInterface
      * Configuration
      */
     const MODULE_CONFIG_TARGET = 'customer/BitExpert_ForceCustomerLogin/url';
+
+    /*
+     * `Redirect Customer to Account Dashboard after Logging in` config path
+     */
+    const CONFIG_PATH_REDIRECT_TO_CUSTOMER_DASHBOARD = 'customer/startup/redirect_dashboard';
+
     /*
      * Configuration
      */
