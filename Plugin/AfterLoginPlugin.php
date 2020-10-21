@@ -15,6 +15,7 @@ use BitExpert\ForceCustomerLogin\Model\Session;
 use Magento\Customer\Controller\Account\LoginPost;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Controller\ResultInterface;
 
 /**
  * Class AfterLoginPlugin
@@ -66,10 +67,10 @@ class AfterLoginPlugin
      * Customer login form page
      *
      * @param LoginPost $customerAccountLoginController
-     * @param Redirect $resultRedirect
-     * @return Redirect
+     * @param ResultInterface $resultRedirect
+     * @return ResultInterface
      */
-    public function afterExecute(LoginPost $customerAccountLoginController, $resultRedirect)
+    public function afterExecute(LoginPost $customerAccountLoginController, ResultInterface $resultRedirect)
     {
         if (self::REDIRECT_DASHBOARD_ENABLED ===
             $this->scopeConfig->getValue(self::REDIRECT_DASHBOARD_CONFIG)) {
@@ -81,8 +82,10 @@ class AfterLoginPlugin
             $targetUrl = $this->defaultTargetUrl;
         }
 
-        /** @var $resultRedirect Redirect */
-        $resultRedirect->setUrl($targetUrl);
+        /** @var Redirect $resultRedirect */
+        if ($resultRedirect instanceof Redirect) {
+            $resultRedirect->setUrl($targetUrl);
+        }
 
         return $resultRedirect;
     }
