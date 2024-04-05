@@ -39,12 +39,16 @@ class WhitelistDefaultInstaller
     public function install(): void
     {
         foreach ($this->whitelistDefaultPool->getEntries() as $route => $data) {
-            $this->whitelistRepository->createEntry(
-                null,
-                $data['label'],
-                $route,
-                $data['strategy'] ?: 'default',
-            );
+            try {
+                $this->whitelistRepository->createEntry(
+                    null,
+                    $data['label'],
+                    $route,
+                    $data['strategy'] ?: 'default',
+                );
+            } catch (\Exception $e) {
+                // log here
+            }
         }
     }
 }
