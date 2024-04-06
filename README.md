@@ -2,6 +2,7 @@
 
 [![Build Status](https://github.com/bitExpert/magento2-force-login/workflows/ci/badge.svg?branch=master)](https://github.com/bitExpert/magento2-force-login/actions)
 [![Coverage Status](https://coveralls.io/repos/github/bitExpert/magento2-force-login/badge.svg?branch=master)](https://coveralls.io/github/bitExpert/magento2-force-login?branch=master)
+![Mastodon Follow](https://img.shields.io/mastodon/follow/109408681246972700?domain=https://rheinneckar.social)
 
 The **Force Login** Module for *Magento® 2* allows you to restrict which pages a visitor is
 able to see. Visitors get redirected to the login page if the page is not marked visitable.
