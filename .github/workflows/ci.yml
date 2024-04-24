@@ -74,6 +74,4 @@ jobs:
         if: matrix.coveralls == true
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          composer require php-coveralls/php-coveralls
-          ./vendor/bin/php-coveralls --coverage_clover=clover.xml -v
+        run: ./vendor/bin/php-coveralls --coverage_clover=clover.xml -v
