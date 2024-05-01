@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 5.4.0
+
+### Added
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#232](https://github.com/bitExpert/magento2-force-login/pull/232) Updating PHP version for Magento 2.4.7
+- [#230](https://github.com/bitExpert/magento2-force-login/pull/230) A whitelist entry is not editable Error after trying to update the module
+
 ## 5.3.0
 
 ### Added
@@ -19,7 +38,6 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Fixed
 
 - [#229](https://github.com/bitExpert/magento2-force-login/pull/229) Restore default whitelist all get static strategy
-
 
 ## 5.2.0
 
