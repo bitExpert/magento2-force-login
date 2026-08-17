@@ -31,5 +31,5 @@ interface WhitelistEntrySearchResultInterface extends \Magento\Framework\Api\Sea
      * @param \BitExpert\ForceCustomerLogin\Api\Data\WhitelistEntryInterface[] $items
      * @return $this
      */
-    public function setItems(array $items = null);
+    public function setItems(array $items);
 }

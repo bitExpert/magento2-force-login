@@ -11,17 +11,20 @@ jobs:
     strategy:
       matrix:
         operating-system: ['ubuntu-latest']
-        php-versions: ['8.1', '8.2']
-        magento: ['2.4.4', '2.4.5', '2.4.6']
+        php-versions: ['8.3', '8.4', '8.5']
+        magento: ['2.4.7', '2.4.8', '2.4.9']
         coveralls: [ true ]
-        include:
-          - operating-system: 'ubuntu-latest'
-            php-versions: '8.1'
-            magento: '2.4.4'
-            coveralls: false
-          - operating-system: 'ubuntu-latest'
-            php-versions: '8.1'
-            magento: '2.4.5'
+        exclude:
+          -  php-versions: '8.4'
+             magento: '2.4.7'
+          -  php-versions: '8.5'
+             magento: '2.4.7'
+          -  php-versions: '8.5'
+             magento: '2.4.8'
+          -  php-versions: '8.3'
+             magento: '2.4.9'
+          -  php-versions: '8.4'
+             magento: '2.4.9'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -34,26 +37,26 @@ jobs:
           coverage: xdebug
           extensions: bcmath, gd
 
+      - name: Install Magento 2.4.7
+        if: matrix.magento == '2.4.7'
+        run: |
+          composer remove --no-update magento/framework magento/module-backend magento/module-customer magento/module-store magento/module-ui
+          composer require magento/framework:~103.0.7.0 magento/module-backend:~102.0.7.0 magento/module-customer:~103.0.7.0 magento/module-store:~101.1.7.0 magento/module-ui:~101.2.7.0
+
+      - name: Install Magento 2.4.8
+        if: matrix.magento == '2.4.8'
+        run: |
+          composer remove --no-update magento/framework magento/module-backend magento/module-customer magento/module-store magento/module-ui
+          composer require magento/framework:~103.0.8.0 magento/module-backend:~102.0.8.0 magento/module-customer:~103.0.8.0 magento/module-store:101.1.8 magento/module-ui:~101.2.8.0
+
+      - name: Install Magento 2.4.9
+        if: matrix.magento == '2.4.9'
+        run: |
+          composer remove --no-update magento/framework magento/module-backend magento/module-customer magento/module-store magento/module-ui
+          composer require magento/framework:~103.0.9.0 magento/module-backend:~102.0.9.0 magento/module-customer:~103.0.9.0 magento/module-store:~101.1.9.0 magento/module-ui:~101.2.9.0
+
       - name: Install Composer dependencies
         run: composer install
-
-      - name: Install Magento 2.4.4
-        if: matrix.magento-versions == '2.4.4'
-        run: |
-          composer remove --no-update magento/framework magento/module-backend magento/module-customer magento/module-store magento/module-ui
-          composer require magento/framework:103.0.4 magento/module-backend:102.0.4 magento/module-customer:103.0.4 magento/module-store:101.1.4 magento/module-ui:101.2.4
-
-      - name: Install Magento 2.4.5
-        if: matrix.magento-versions == '2.4.5'
-        run: |
-          composer remove --no-update magento/framework magento/module-backend magento/module-customer magento/module-store magento/module-ui
-          composer require magento/framework:103.0.5 magento/module-backend:102.0.5 magento/module-customer:103.0.5 magento/module-store:101.1.5 magento/module-ui:101.2.5
-
-      - name: Install Magento 2.4.6
-        if: matrix.magento-versions == '2.4.6'
-        run: |
-          composer remove --no-update magento/framework magento/module-backend magento/module-customer magento/module-store magento/module-ui
-          composer require magento/framework:103.0.6 magento/module-backend:102.0.6 magento/module-customer:103.0.6 magento/module-store:101.1.6 magento/module-ui:101.2.6
 
       - name: Codesniffer
         run: composer cs-check
