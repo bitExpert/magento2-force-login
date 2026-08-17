@@ -99,6 +99,10 @@
                     <item name="label" xsi:type="string">Paypal</item>
                     <item name="strategy" xsi:type="string"></item>
                 </item>
+                <item name="/shipping/tracking/popup" xsi:type="array">
+                    <item name="label" xsi:type="string">Shipping Tracking Popup</item>
+                    <item name="strategy" xsi:type="string"></item>
+                </item>
             </argument>
         </arguments>
     </type>
