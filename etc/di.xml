@@ -77,27 +77,27 @@
                 </item>
                 <item name="/customer/account/resetpasswordpost" xsi:type="array">
                     <item name="label" xsi:type="string">Customer Account Reset Password Post</item>
-                    <item name="strategy" xsi:type="string"></item>
+                    <item name="strategy" xsi:type="string">regex-all</item>
                 </item>
                 <item name="/page_cache/block/esi/blocks" xsi:type="array">
                     <item name="label" xsi:type="string">Varnish ESI url</item>
-                    <item name="strategy" xsi:type="string"></item>
+                    <item name="strategy" xsi:type="string">regex-all</item>
                 </item>
                 <item name="/stores/store/redirect" xsi:type="array">
                     <item name="label" xsi:type="string">Store-Switcher Redirect</item>
-                    <item name="strategy" xsi:type="string"></item>
+                    <item name="strategy" xsi:type="string">regex-all</item>
                 </item>
                 <item name="/stores/store/switch" xsi:type="array">
                     <item name="label" xsi:type="string">Store-Switcher Switch</item>
-                    <item name="strategy" xsi:type="string"></item>
+                    <item name="strategy" xsi:type="string">regex-all</item>
                 </item>
                 <item name="/customer/account/createpost" xsi:type="array">
                     <item name="label" xsi:type="string">Customer Create (Post)</item>
-                    <item name="strategy" xsi:type="string"></item>
+                    <item name="strategy" xsi:type="string">regex-all</item>
                 </item>
                 <item name="/paypal/ipn/" xsi:type="array">
                     <item name="label" xsi:type="string">Paypal</item>
-                    <item name="strategy" xsi:type="string"></item>
+                    <item name="strategy" xsi:type="string">regex-all</item>
                 </item>
             </argument>
         </arguments>
